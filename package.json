@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Semantic based React standalone Popup",
   "main": "./dist/react-semantic-popup.js",
+  "repository": {
+    "url": "https://github.com/icevl/react-semantic-popup.git"
+  },
   "peerDependencies": {
     "react": "^16.6.1",
     "react-dom": "^16.6.3"
