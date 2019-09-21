@@ -2,7 +2,7 @@
 
 **How to use**
 
-    import Popup from 'react-semantic-popup
+    import Popup from 'react-semantic-popup';
 
     <Popup text='Text for popup'>
 	    <div>
