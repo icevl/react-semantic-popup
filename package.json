@@ -31,9 +31,6 @@
     "prepublish": "rm -rf ./dist && npm run build",
     "build": "webpack --optimize-minimize --mode production"
   },
-  "publishConfig": {
-    "access": "restricted"
-  },
   "author": "Mikhail Kabanov",
   "license": "MIT"
 }
