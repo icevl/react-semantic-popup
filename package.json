@@ -1,0 +1,39 @@
+{
+  "name": "react-semantic-popup",
+  "version": "1.0.0",
+  "description": "Semantic based React standalone Popup",
+  "main": "./dist/react-semantic-popup.js",
+  "peerDependencies": {
+    "react": "^16.6.1",
+    "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "node-sass": "^4.12.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "scripts": {
+    "prepublish": "rm -rf ./dist && npm run build",
+    "build": "webpack --optimize-minimize --mode production"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "author": "Mikhail Kabanov",
+  "license": "MIT"
+}
