@@ -2,7 +2,16 @@
 
 React component based on Semantic UI inline styles with auto and manual align popup position.
 
-**How to use**
+**Install**
+
+    npm i react-semantic-popup
+
+or
+
+    yarn add react-semantic-popup
+
+
+**Use**
 
     import Popup from 'react-semantic-popup';
 
