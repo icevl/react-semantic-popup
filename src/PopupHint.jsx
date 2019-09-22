@@ -10,11 +10,11 @@ export default class PopupHint extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.isShown && nextProps.isShown != this.props.isShown) {
+        if (nextProps.isShown && nextProps.isShown !== this.props.isShown) {
             this.show();
         }
 
-        if (!nextProps.isShown && nextProps.isShown != this.props.isShown) {
+        if (!nextProps.isShown && nextProps.isShown !== this.props.isShown) {
             this.hide();
         }
     }

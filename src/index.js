@@ -20,6 +20,10 @@ class Popup extends Component {
     componentDidMount() {
         this.pointer = this.getDOMElement(this.pointerRef);
 
+        if (!this.pointer) {
+            return false;
+        }
+
         if (this.trigger === "hover") {
             this.pointer.addEventListener("mouseover", this.onTriggerStart.bind(this));
             this.pointer.addEventListener("mouseout", this.onTriggerLeave.bind(this));
@@ -44,7 +48,7 @@ class Popup extends Component {
     }
 
     getDOMElement(element) {
-        if (element.refs) {
+        if (element && element.refs) {
             element = ReactDOM.findDOMNode(element);
         }
         return element;
@@ -64,18 +68,18 @@ class Popup extends Component {
     }
 
     /**
-     * Отступ от края
-     * Если элемент указателя на popup по ширине больше (this.arrowPixelsFromEdge * 2),
-     * то left попапа будет равно left указателя без отступа.
+     * Margin from the edge
+     * If the popup pointer element is wider then *this.arrowPixelsFromEdge * 2*,
+     * the left popup will be equal to the left pointer without margin.
      *
-     * Либо pop выравнивается относительно центра указателя.
+     * Or popup is aligned with the center of the pointer.
      */
     getOffset(align, target) {
         if (target.width >= this.arrowPixelsFromEdge * 2) {
             return 0;
         }
 
-        let offset = 0;
+        let offset;
 
         switch (align) {
             case "top left":
@@ -89,6 +93,9 @@ class Popup extends Component {
                 offset -= target.width / 2;
                 offset += this.arrowPixelsFromEdge;
                 break;
+
+            default:
+                offset = 0;
         }
 
         return offset;
@@ -194,7 +201,7 @@ class Popup extends Component {
 
             const allowTop = typeof style.top === "number" && style.top + popup.height - window.pageYOffset < window.innerHeight && style.top - window.pageYOffset >= 45; //45 пикселей высота навбара. не выше навбара!
 
-            // Bottom всегда auto
+            /** Bottom always auto */
 
             if ((allowLeft || allowRight) && allowTop) {
                 return align;
@@ -237,12 +244,22 @@ class Popup extends Component {
         return this.state.isShown && Object.keys(this.state.styles).length > 0;
     }
 
+    getChildren() {
+        return React.Children.map(this.props.children, element => {
+            if (typeof element === "object") {
+                return React.cloneElement(element, {
+                    ref: ref => (this.pointerRef = ref)
+                });
+            } else {
+                return <span ref={ref => (this.pointerRef = ref)}>{element}</span>;
+            }
+        });
+    }
+
     render() {
-        const children = React.Children.map(this.props.children, element =>
-            React.cloneElement(element, {
-                ref: ref => (this.pointerRef = ref)
-            })
-        );
+        if (!this.props.children) {
+            return null;
+        }
 
         const styles = { ...this.state.styles, zIndex: 9999999 };
         let classNames = `ui popup ${this.state.align} `;
@@ -259,7 +276,7 @@ class Popup extends Component {
                     </div>
                 </PopupHint>
 
-                {children}
+                {this.getChildren()}
             </React.Fragment>
         );
     }

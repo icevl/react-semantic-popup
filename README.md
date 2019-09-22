@@ -19,7 +19,7 @@
 
 **Example**
 
-    <Popup text='Clicked' align='top right'click>
+    <Popup text='Clicked' align='top right' click>
 	    Click me
     </Popup>
 
