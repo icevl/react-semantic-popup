@@ -7,26 +7,43 @@ export default class PopupHint extends React.Component {
         this.state = {
             isShown: false
         };
+        this.onScroll = this.hide.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.isShown && nextProps.isShown !== this.props.isShown) {
+    componentDidUpdate() {}
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        if (this.props.isShown && !prevState.isShown) {
             this.show();
         }
 
-        if (!nextProps.isShown && nextProps.isShown !== this.props.isShown) {
+        if (!this.props.isShown && prevState.isShown) {
             this.hide();
         }
+
+        return {
+            isShown: this.props.isShown
+        };
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.isShown === prevState.isShown) {
+            return null;
+        }
+
+        return {
+            isShown: nextProps.isShown
+        };
     }
 
     show() {
-        window.addEventListener("scroll", this.hide.bind(this));
         this.setState({ isShown: true });
+        window.addEventListener("scroll", this.onScroll);
     }
 
     hide() {
-        window.removeEventListener("scroll", this.hide.bind(this));
-        this.setState({ isShown: false });
+        window.removeEventListener("scroll", this.onScroll);
+        this.props.onClose();
     }
 
     render() {

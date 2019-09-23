@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.0.5] - 2019-09-23
+### Added
+- React 17 compatibility
 
 ## [1.0.4] - 2019-09-23
 ### Added

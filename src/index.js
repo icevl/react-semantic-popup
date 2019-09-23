@@ -240,6 +240,10 @@ class Popup extends Component {
         return handler(e);
     }
 
+    onClose() {
+        this.setState({ isShown: false });
+    }
+
     isHintReady() {
         return this.state.isShown && Object.keys(this.state.styles).length > 0;
     }
@@ -279,7 +283,7 @@ class Popup extends Component {
 
         return (
             <React.Fragment>
-                <PopupHint isShown={this.state.isShown}>
+                <PopupHint isShown={this.state.isShown} onClose={this.onClose.bind(this)}>
                     <div ref={ref => (this.popupRef = ref)} className={this.getClassNames()} style={styles}>
                         {this.props.content}
                     </div>
