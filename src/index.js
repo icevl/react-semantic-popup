@@ -217,7 +217,7 @@ class Popup extends Component {
     }
 
     onTriggerStart() {
-        if (this.state.isShown || !this.props.text) {
+        if (this.state.isShown || !this.props.content) {
             return false;
         }
 
@@ -256,23 +256,32 @@ class Popup extends Component {
         });
     }
 
+    getClassNames() {
+        const classNames = ["ui", "popup", this.state.align];
+
+        if (this.props.inverted) {
+            classNames.push("inverted");
+        }
+
+        if (this.state.isShown) {
+            classNames.push("visible");
+        }
+
+        return classNames.join(" ");
+    }
+
     render() {
         if (!this.props.children) {
             return null;
         }
 
         const styles = { ...this.state.styles, zIndex: 9999999 };
-        let classNames = `ui popup ${this.state.align} `;
-
-        if (this.state.isShown) {
-            classNames += "visible";
-        }
 
         return (
             <React.Fragment>
                 <PopupHint isShown={this.state.isShown}>
-                    <div ref={ref => (this.popupRef = ref)} className={classNames} style={styles} data-tooltip={this.props.text} data-position={this.state.align}>
-                        {this.props.text}
+                    <div ref={ref => (this.popupRef = ref)} className={this.getClassNames()} style={styles}>
+                        {this.props.content}
                     </div>
                 </PopupHint>
 

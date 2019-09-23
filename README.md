@@ -15,7 +15,7 @@ or
 
     import Popup from 'react-semantic-popup';
 
-    <Popup text='Text for popup'>
+    <Popup content='Text for popup'>
         <div>
     	    Some trigger element
         </div>
@@ -25,15 +25,13 @@ or
 
 | prop  | value                                                                                                                                                               |
 | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| align | _string_ custom hint position: "_top left_", "_top center_", "_top right_", "_right center_", "_left center_", "_bottom left_", "_bottom center_", "_bottom right_" |
-| click | default: false. Trigger popup by clicking on children element.                                                                                                      |
+| content | *[string or JSX]*. Popup hint content. |
+| align | *[string]*. Custom hint position: "_top left_", "_top center_", "_top right_", "_right center_", "_left center_", "_bottom left_", "_bottom center_", "_bottom right_" |
+| inverted | *[boolean]* *default: false*. Inverted theme. |
+| click | *[boolean]* *default: false*. Trigger popup by clicking on children element.                                                                                                      |
 
 **Example**
 
-    <Popup text='Clicked' align='top right' click>
+    <Popup content='Clicked' align='top right' inverted click>
         Click me
     </Popup>
-
-**Not yet implemented**
-
--   Dark (inverted) theme
